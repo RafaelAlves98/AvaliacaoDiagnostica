@@ -1,5 +1,5 @@
 const board = document.getElementById("board");
-const quadrado = document.getElementById("quadrado");
+const quadrado = document.getElementsByClassName("quadrado");
 const jogadores = ["X", "O"];
 let jogadorAtual = jogadores[0];
 const mensagemFinal = document.createElement("h2");
@@ -24,8 +24,13 @@ for (let i = 0; i < quadrado.length; i++) {
     if (quadrado[i].textContent !== "") {
       return;
     }
+    quadrado[i].textContent = jogadorAtual;
     if (checarVencedor(jogadorAtual)) {
       mensagemFinal.textContent = `Fim de Jogo! ${jogadorAtual} venceu!`;
+      return;
+    }
+    if (empate()) {
+      mensagemFinal.textContent = `Jogo Empatado!`;
       return;
     }
     jogadorAtual = jogadorAtual === jogadores[0] ? jogadores[1] : jogadores[0];
